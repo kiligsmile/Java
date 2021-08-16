@@ -10,6 +10,8 @@ public class AddMultiplePerson {
 	int time; // 记录最终用户数量
 	Person persons[] = new Person[MAX];
 	
+
+	
 	// 随机生成地址
 	String Province() { 
 		int s = new Random().nextInt(province.length);
