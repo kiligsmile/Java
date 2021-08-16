@@ -11,6 +11,7 @@ class DeletePerson {
 		if(IsExist.isExist(name)==-1) {
 			System.out.println("查无此人！");
 		}
+		
 		else {
 			for(int i=IsExist.isExist(name);i<Addressbooks.m_Size-1;i++) {
 				Addressbooks.persons[i]=Addressbooks.persons[i+1];

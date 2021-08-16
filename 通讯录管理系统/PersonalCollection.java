@@ -23,14 +23,11 @@ public class PersonalCollection {
 			
 		}
 	}
-	
 	void show() {
 		if(m_Size>0) {
 			for(int i=0;i<m_Size;i++) {
-				System.out.print("姓名："+Addressbooks.persons[i].m_name+'\t');
-				System.out.print("性别："+Addressbooks.persons[i].m_Sex+'\t');
-				System.out.print("电话："+Addressbooks.persons[i].m_phone+'\t');
-				System.out.println("住址："+Addressbooks.persons[i].m_Addr);
+				ShowInformation showInformation = new ShowInformation();
+				showInformation.showinformation(i);
 			}
 		}
 		else {

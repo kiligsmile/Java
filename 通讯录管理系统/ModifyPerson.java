@@ -20,20 +20,26 @@ class ModifyPerson {
 			System.out.println("请选择性别：");
 			System.out.println("1————男  2————女");
 			while(true) {
-				int sex = reader.nextInt(); 
-				if(sex==1) {
-					Addressbooks.persons[site].m_Sex="男";
-					break;
+				try {
+					int sex = reader.nextInt(); 
+					if(sex==1) {
+						Addressbooks.persons[site].m_Sex="男";
+						break;
+					}
+					else if(sex==2) {
+						Addressbooks.persons[site].m_Sex="女";
+						break;
+					}
+					else {
+						System.out.println("请输入正确的数字");
+					}
 				}
-				else if(sex==2) {
-					Addressbooks.persons[site].m_Sex="女";
-					break;
-				}
-				else {
-					System.out.println("请输入正确的数字");
+				catch(InputMismatchException e){
+					System.out.println("输入有误，请输入正确的数字：");
+					reader.next();
 				}
 			}
-			if(Addressbooks.persons[site].num==2) {
+			if(Addressbooks.persons[site].num.equals("2")) {
 				System.out.println("请输入联系人的电话号码1：");
 				Addressbooks.persons[site].m_phone = reader.next();
 				System.out.println("请输入联系人的电话号码2：");
@@ -48,10 +54,7 @@ class ModifyPerson {
 			}
 			System.out.println("请输入联系人的家庭住址：");
 			Addressbooks.persons[site].m_Addr = reader.next();
-			System.out.println("修改成功！");
-			
+			System.out.println("修改成功！");	
 		}
-		
 	}
-
 }

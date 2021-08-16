@@ -8,9 +8,9 @@ class Person {
 	String m_phone;
 	String m_phone2;
 	String m_Addr;
-	String com1;
-	String com2;
-	int num = 1;
+	String com1; // 移动、电信...
+	String com2; // 第二个电话号码
+	String num = "1";
 }
 // 对象数组
 class Addressbooks{

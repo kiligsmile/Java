@@ -1,14 +1,12 @@
 package 通讯录管理系统;
-
+import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
-
 // 添加联系人
-class AddPerson{
+class AddPerson {
 	Scanner reader = new Scanner(System.in);
 	String judge = "1";
-	int i = 0;
-	void addPerson() {
+	void addPerson() throws IOException {
 		Phonenumber phonenumber = new Phonenumber();
 		if(Addressbooks.m_Size>=Addressbooks.MAX) {
 			System.out.println("通讯录已满！");
@@ -18,13 +16,13 @@ class AddPerson{
 			Person person = new Person();
 			System.out.println("请输入联系人的姓名：");
 			person.m_name = reader.next();
-			for(i=0;i<Addressbooks.m_Size;i++) {
+			for(int i=0;i<Addressbooks.m_Size;i++) {
 				if(person.m_name.equals(Addressbooks.persons[i].m_name)) {
 					System.out.println("该姓名已存在，是否将号码添加到已有联系人中 Y/N");
 					judge = reader.next();
 					while(true) {
 						if(judge.equals("Y")) {
-							if(Addressbooks.persons[i].num == 2) {
+							if(Addressbooks.persons[i].num.equals("2")) {
 								System.out.println("储存该联系人的电话号码不能超过两个");
 							}
 							else {
@@ -40,7 +38,7 @@ class AddPerson{
 										person.m_phone = reader.next();
 									}
 								}
-								Addressbooks.persons[i].num = 2;
+								Addressbooks.persons[i].num = "2";
 							}
 							break;
 						}
@@ -59,24 +57,30 @@ class AddPerson{
 				System.out.println("请选择联系人的性别：");
 				System.out.println("1————男  2————女");
 				while(true) {
-					int sex = reader.nextInt(); 
-					if(sex==1) {
-						person.m_Sex="男";
-						break;
+					try {
+						int sex = reader.nextInt(); 
+						if(sex==1) {
+							person.m_Sex="男";
+							break;
+						}
+						else if(sex==2) {
+							person.m_Sex="女";
+							break;
+						}
+						else {
+							System.out.println("请输入正确的数字");
+						}
 					}
-					else if(sex==2) {
-						person.m_Sex="女";
-						break;
-					}
-					else {
-						System.out.println("请输入正确的数字");
+					catch(InputMismatchException e){
+						System.out.println("输入有误，请输入正确的数字：");
+						reader.next();
 					}
 				}
 				System.out.println("请输入联系人的电话号码：");
 				person.m_phone = reader.next();
 				while(true) {
-					if(phonenumber.getnumber(person.m_phone)==1) {
-						person.com1=phonenumber.PhoneNumber(person.m_phone);
+					if(phonenumber.getnumber(person.m_phone)==1) { // 判断是否为正确的电话号码形式
+						person.com1=phonenumber.PhoneNumber(person.m_phone); // 若为正确，判断移动、电信等
 						break;
 					}
 					else {
@@ -88,10 +92,8 @@ class AddPerson{
 				person.m_Addr = reader.next();
 				Addressbooks.persons[Addressbooks.m_Size]=person;
 				Addressbooks.m_Size++;
-				System.out.println("添加成功！");
-			}
-			
-			
+				System.out.println("添加成功！");				
+			}		
 		}
 	}
 }

@@ -1,22 +1,36 @@
 package 通讯录管理系统;
 import java.util.*;
+import java.io.*;
+import java.io.IOException;
 
 public class Main {
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
+		GetTextLines gettextlines = new GetTextLines();
+		Addressbooks.m_Size=gettextlines.getTextLines(); // 读取txt文件有多少行，即储存了多少联系人
+		ReadInformation readInformation = new ReadInformation();
+		readInformation.readinformation(); // 将txt文件中的联系人读取到数组中
 		Scanner reader = new Scanner(System.in);
 		int select1 = 0; // 选择主菜单
 		int select2 = 0; // 选择附件菜单
-		boolean bool1 = true;
+		boolean bl = true;
 		String name;
 		ShowMenu showmenu = new ShowMenu();
-		while (bool1) {  // 当bool1为false时，退出循环
+		while (bl) {  // 当bool1为false时，退出循环
 			showmenu.showMenu(); // 显示菜单
 			System.out.println("请输入你的选择：");
-			select1 = reader.nextInt();
-			while(select1<0||select1>7) {   // 输入正确的序号，才会终止循环
-				System.out.println("请输入正确的序号：");  
-				select1 = reader.nextInt();
+			while(true) {
+				try {
+					select1 = reader.nextInt();
+					while(select1<0||select1>7) {   // 输入正确的序号，才会终止循环
+						System.out.println("请输入正确的序号：");  
+						select1 = reader.nextInt();
+					}
+					break;
+				}
+				catch(InputMismatchException e){
+					System.out.println("输入有误，请输入正确的序号：");
+					reader.next();
+				}
 			}
 			switch (select1) {
 			case 1:  // 添加联系人
@@ -45,16 +59,27 @@ public class Main {
 				break;
 			case 0: // 退出程序
 				System.out.println("欢迎下次使用~");
-				bool1 = false;
+				WriteInformation writeInformation = new WriteInformation();
+				writeInformation.writeinformation(); // 在退出程序前，将对电话簿的操作进行储存
+				bl = false;
 				break;
 			case 7:
 				PersonalCollection personalcollection = new PersonalCollection();
 				showmenu.ShowMenu2();
 				System.out.println("请输入你的选择：");
-				select2 = reader.nextInt();
-				while(select2<1||select2>4) {
-					System.out.println("请输入正确的序号：");  // 输入正确序号时，才会退出循环
-					select2 = reader.nextInt();
+				while(true) {
+					try {
+						select2 = reader.nextInt();
+						while(select2<1||select2>4) {
+							System.out.println("请输入正确的序号：");  // 输入正确序号时，才会退出循环
+							select2 = reader.nextInt();
+						}
+						break;
+					}
+					catch(InputMismatchException e){
+						System.out.println("输入有误，请输入正确的序号：");
+						reader.next();
+					}
 				}
 				switch (select2) {
 				case 1:// 收藏
@@ -67,15 +92,11 @@ public class Main {
 					AddMultiplePerson addmultipleperson = new AddMultiplePerson();
 					addmultipleperson.view();
 					break;
-				case 4:
-					// 排序
+				default:
+					break;
 				}
-			default:
-				break;
 			}
 			
 		}
-			
-
 	}
 }
