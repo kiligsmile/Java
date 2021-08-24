@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 // 添加联系人
+
 class AddPerson {
 	Scanner reader = new Scanner(System.in);
 	String judge = "1";
