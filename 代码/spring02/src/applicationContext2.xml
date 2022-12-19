@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        <!--特殊值的注入-->
+
+         <bean id="user" class="com.bjsxt.spring02.User">
+             <!--给数组进行值的注入-->
+             <property name="arr">
+
+                 <array>
+                     <value>A</value>
+                     <value>B</value>
+                     <value>C</value>
+                 </array>
+
+             </property>
+
+             <!--list集合进行值注入-->
+             <property name="list">
+
+                 <list>
+                     <value>A</value>
+                     <value>B</value>
+                     <value>C</value>
+
+                 </list>
+
+             </property>
+
+             <!--Set集合的赋值-->
+
+             <property name="set">
+
+                 <set>
+
+                     <value>A</value>
+                     <value>B</value>
+                     <value>C</value>
+                     <value>A</value>
+
+                 </set>
+
+             </property>
+
+             <!--Map集合赋值-->
+             <property name="map">
+
+                 <map>
+
+                     <entry>
+                         <key><value>A</value></key>
+                         <value>bjsx</value>
+                     </entry>
+
+                     <entry>
+                         <key><value>B</value></key>
+                         <value>bjsxt</value>
+                     </entry>
+
+
+                 </map>
+
+             </property>
+
+
+
+         </bean>
+
+
+</beans>

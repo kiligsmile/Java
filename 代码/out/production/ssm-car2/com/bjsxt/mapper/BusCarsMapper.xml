@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.BusCarsMapper">
+
+    <select id="selectAll" resultType="busCars">
+
+         SELECT   *  from  bus_cars
+
+    </select>
+
+    <insert id="insert">
+
+        insert into bus_cars values (#{carnumber},#{cartype},#{color},#{price},#{rentprice},#{deposit},1,#{description},#{carimg})
+
+    </insert>
+
+    <update id="update">
+
+        UPDATE  bus_cars  set cartype=#{cartype},color=#{color},price=#{price},rentprice=#{rentprice},deposit=#{deposit},description=#{description},carimg=#{carimg}  where carnumber=#{carnumber}
+
+    </update>
+
+    <delete id="delete">
+
+        DELETE   from  bus_cars  where  carnumber=#{param1}
+
+    </delete>
+
+    <select id="selectMore" resultType="busCars">
+
+        SELECT   *  FROM  bus_cars  WHERE   isrenting=1
+
+    </select>
+
+    <update id="update2">
+
+        UPDATE  bus_cars   set  isrenting=0  where  carnumber=#{param1}
+
+    </update>
+
+    <update id="update3">
+
+        UPDATE  bus_cars   set  isrenting=1  where  carnumber=#{param1}
+
+    </update>
+
+
+    <select id="selectOne" resultType="busCars">
+
+        SELECT   *  from  bus_cars  where  carnumber=#{param1}
+
+    </select>
+
+</mapper>

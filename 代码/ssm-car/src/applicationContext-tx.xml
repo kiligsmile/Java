@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+      <!--配置声明式事务-->
+
+    <bean  id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+
+        <property name="dataSource" ref="ds" ></property>
+
+    </bean>
+
+    <!--扫描@Transactional-->
+
+    <tx:annotation-driven></tx:annotation-driven>
+
+<!--
+    <tx:advice id="ad" transaction-manager="transactionManager">
+        
+        <tx:attributes>
+            <tx:method name="save*"/>
+        </tx:attributes>
+        
+    </tx:advice>
+    
+    <aop:config>
+        
+        <aop:pointcut id="pt1" expression="execution(* com.bjsxt.service.impl.*.*(..))"></aop:pointcut>
+
+        <aop:advisor advice-ref="ad" pointcut-ref="pt1"></aop:advisor>
+        
+    </aop:config>-->
+
+
+
+
+
+
+
+</beans>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.BusRentsMapper">
+
+
+    <update id="update">
+
+        update  Bus_Rents   set  rentflag=1  where   rentid=#{0}
+
+    </update>
+
+    <select id="selectOne" resultType="busRents">
+
+        SELECT   *  from Bus_Rents  where  rentid =#{0}
+
+    </select>
+
+    <insert id="insert">
+
+        insert  into Bus_Rents  values(#{rentid},#{price},#{begindate},#{returndate},0,#{identity},#{carnumber},#{opername})
+
+    </insert>
+
+    <select id="selectMore" resultType="BusRents">
+
+        SELECT   *  from Bus_Rents
+
+        <where>
+
+            <if test="rentid!=null and  rentid!=''">
+
+                and  rentid=#{rentid}
+
+            </if>
+
+            <if test="begindate!=null and  begindate!=''">
+
+                and  begindate=#{begindate}
+
+            </if>
+
+            <if test="identity!=null and  identity!=''">
+
+                and  identity=#{identity}
+
+            </if>
+
+            <if test="carnumber!=null and  carnumber!=''">
+
+                and  carnumber=#{carnumber}
+
+            </if>
+
+            <if test="returndate!=null and  returndate!=''">
+
+                and  returndate=#{returndate}
+
+            </if>
+
+
+        </where>
+
+
+    </select>
+
+
+</mapper>

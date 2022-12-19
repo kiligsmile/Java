@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <!--【1】连接数据库 获得数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <property name="driverClassName" value="${driver}"></property>
+
+        <property name="url" value="${url}"></property>
+
+        <property name="username" value="root"></property>
+
+        <property name="password" value="root"></property>
+
+    </bean>
+
+    <!--【2】获得sessionFactory对象-->
+
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+        <property name="dataSource" ref="dataSource"></property>
+
+        <property name="typeAliasesPackage" value="com.bjsxt.pojo"></property>
+
+    </bean>
+
+    <!--【3】扫描mapper文件-->
+
+    <bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+        <property name="sqlSessionFactoryBeanName" value="factory"></property>
+
+        <property name="basePackage" value="com.bjsxt.mapper"></property>
+
+    </bean>
+    <!--mapper层进行扫描会自动的创建所有mapper层的对象 对象的名称 就是接口名称首字母小写-->
+
+    <!--<bean id="userMapper" class="com.bjsxt.mapper.UserMapper.imp"></bean>
+-->
+
+    <!--业务层值的注入-->
+    <context:component-scan base-package="com.bjsxt.service.impl"></context:component-scan>
+
+
+
+    <!--配置通知对象-->
+    <bean id="logAfter" class="com.bjsxt.advice.LogAdvice"></bean>
+
+
+    <!--配置日志通知的切面-->
+
+    <aop:config>
+
+        <aop:pointcut id="pt1" expression="execution(* com.bjsxt.service.impl.UserServiceImpl.login(..))"></aop:pointcut>
+
+        <aop:advisor advice-ref="logAfter" pointcut-ref="pt1"></aop:advisor>
+
+    </aop:config>
+
+
+    <!--声明事务管理的对象-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+
+        <property name="dataSource" ref="dataSource"></property>
+
+    </bean>
+
+    <!--事务的通知-->
+    <tx:advice id="advice" transaction-manager="transactionManager">
+
+        <tx:attributes>
+            <tx:method name="login*"  read-only="true" isolation="DEFAULT" rollback-for="" no-rollback-for=""/>
+        </tx:attributes>
+
+    </tx:advice>
+
+
+    <!--配置TX声明式事务-->
+    
+    <aop:config>
+        
+        <aop:pointcut id="pt2" expression="execution(* com.bjsxt.service.impl.UserServiceImpl.*(..))"></aop:pointcut>
+
+        <aop:advisor advice-ref="advice" pointcut-ref="pt2"></aop:advisor>
+        
+    </aop:config>
+
+
+
+</beans>

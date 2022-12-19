@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--【A】使用有参构造进行值的注入-->
+    <!--
+        value  和 ref的使用场景
+
+        如果给基本数据类型+String  注入值的时候使用 value
+
+        如果给对象注入值的时候  使用 ref
+    -->
+    <bean id="cla" class="com.bjsxt.spring01.Clazz">
+        <constructor-arg name="cno" value="1"></constructor-arg>
+
+        <constructor-arg name="cname" value="501java"></constructor-arg>
+    </bean>
+
+   <!--<bean id="stu" class="com.bjsxt.spring01.Student" >
+
+        <constructor-arg name="age" value="18"></constructor-arg>
+
+        <constructor-arg name="name" value="zs"></constructor-arg>
+
+        <constructor-arg name="sex" value="男"></constructor-arg>
+
+        <constructor-arg name="clazz" ref="cla"></constructor-arg>
+
+    </bean>-->
+
+    <!--【B】使用set方法进行值的注入-->
+    
+   <!-- <bean id="stu" class="com.bjsxt.spring01.Student">
+        
+        <property name="sex" value="男"></property>
+
+        <property name="age" value="18"></property>
+
+        <property name="name"  value="zs"></property>
+
+        <property name="clazz" ref="cla"></property>
+    </bean>-->
+
+  <!--  <bean id="df" class="org.springframework.format.datetime.DateFormatter">
+
+        <property name="pattern"  value="yyyy-MM-dd"></property>
+            
+    </bean>
+-->
+
+    <!--【C】自动注入
+         autowire的可选择值
+
+          *底层调用调用的都是set方法
+         byName：查找方式  整个配置文件中查询【bean标签的ID名称】和【注入实体类中的属性名】一致的话，就完成自动注入
+
+        byType:查找方式  整个配置文件中查询【bean标签类型】和【注入实体类中的属性类型】一致的话，就完成自动注入
+
+
+         *底层走的是构造器
+        constructor:首先根据bena 标签的ID名称进行匹配，如果没有对应的值，再根据bean的类型进行匹配
+    -->
+    <bean id="stu" class="com.bjsxt.spring01.Student" autowire="constructor"></bean>
+
+
+
+
+
+</beans>

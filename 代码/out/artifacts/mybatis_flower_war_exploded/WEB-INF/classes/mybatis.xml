@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+
+    <!--开启日志-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--起别名-->
+    <typeAliases>
+
+        <package name="com.bjsxt.pojo"></package>
+
+    </typeAliases>
+
+
+    <environments default="mysql">
+
+        <!--mysql-->
+        <environment id="mysql">
+            <!--mybatis的事务管理-->
+            <transactionManager type="JDBC"></transactionManager>
+
+            <!--底层采用数据库连接池的方式连接数据库-->
+            <dataSource type="POOLED">
+
+                <property name="driver" value="com.mysql.jdbc.Driver"></property>
+
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"></property>
+
+                <property name="username" value="root"></property>
+
+                <property name="password" value="root"></property>
+
+
+            </dataSource>
+        </environment>
+
+        <!--orcl-->
+       <!-- <environment id="orcl456">
+            <transactionManager type=""></transactionManager>
+            <dataSource type=""></dataSource>
+        </environment>-->
+
+
+    </environments>
+
+    <!--扫描mpper文件-->
+
+    <mappers>
+
+        <!--扫描xml名称-->
+        <!--<mapper resource="com/bjsxt/mapper/FlowerMapper.xml"></mapper>
+-->
+
+        <!--接口名称（必须)和xml文件名称一致
+            扫描包的时候会首先找到包下的所有的接口，然后找和接口名称一致的xml进行扫描
+        -->
+        <package name="com.bjsxt.mapper"></package>
+
+    </mappers>
+
+
+
+</configuration>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.BusCarsMapper">
+
+
+    <select id="eaCount" resultType="BusCars">
+
+        SELECT   COUNT(*)  price ,cartype  FROM  bus_cars   GROUP  BY  cartype
+
+    </select>
+
+    <select id="selectAll" resultType="BusCars">
+
+        select  *  from bus_Cars
+
+    </select>
+
+    <insert id="insert">
+
+        INSERT   into   bus_Cars  values(#{carnumber},#{cartype},#{color},#{price},#{rentprice},#{deposit},1,#{description},#{carimg})
+
+    </insert>
+
+
+    <delete id="delete">
+
+        DELETE   from bus_Cars  where  carnumber=#{0}
+
+    </delete>
+
+    <update id="update">
+
+         update  bus_Cars  set cartype=#{cartype},color=#{color},price=#{price},rentprice=#{rentprice},deposit=#{deposit},description=#{description},carimg=#{carimg} where carnumber=#{carnumber}
+
+    </update>
+
+    <select id="selectMore" resultType="BusCars">
+
+        SELECT  *  from bus_Cars where  isrenting=1
+
+    </select>
+
+
+    <update id="update2">
+
+        update   bus_Cars  set isrenting=0  where  carnumber=#{0}
+
+    </update>
+
+    <update id="update3">
+
+        update   bus_Cars  set isrenting=1  where  carnumber=#{0}
+
+    </update>
+
+    <select id="selectOne" resultType="BusCars">
+
+
+         SELECT  *  from  bus_Cars  where   carnumber=#{0}
+
+    </select>
+</mapper>

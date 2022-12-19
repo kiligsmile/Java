@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.FilghtsMapper">
+
+    <select id="selectAll" resultType="filghts">
+
+        SELECT  f.* ,a.`airport_name`  n1   ,a2.`airport_name`  n2  FROM  `filghts`  f  JOIN  `airports`  a   ON   f.`take_airport_id`=a.`id`  JOIN  `airports`   a2   ON  f.`landing_airport_id`=a2.`id`
+
+    </select>
+
+</mapper>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jsqlparser-0.9.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ssm-easyui2/web/WEB-INF/lib/jsqlparser-0.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ssm-easyui2/web/WEB-INF/lib/pagehelper-4.0.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

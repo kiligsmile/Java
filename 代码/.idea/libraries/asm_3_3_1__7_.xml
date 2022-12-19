@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="asm-3.3.1 (7)">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/springmvc03-upload/web/WEB-INF/lib/asm-3.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/springmvc03-upload/web/WEB-INF/lib/cglib-2.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/springmvc03-upload/web/WEB-INF/lib/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/springmvc03-upload/web/WEB-INF/lib/gson-2.2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

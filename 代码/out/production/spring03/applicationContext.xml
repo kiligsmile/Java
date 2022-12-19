@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="user" class="com.bjsxt.pojo.User"></bean>
+
+
+    <!--创建前置通知对象-->
+    <bean id="befor" class="com.bjsxt.advice.BeforAdvice"></bean>
+    <!--创建后置通知对象-->
+    <bean id="after" class="com.bjsxt.advice.AfterAdvice"></bean>
+    <!--创建环绕通知对象-->
+    <bean id="run" class="com.bjsxt.advice.RunAdvice"></bean>
+    <!--创建异常通知对象-->
+    <bean id="thr" class="com.bjsxt.advice.ThrowAdvice" ></bean>
+
+
+    <!--织入成一个切面-->
+    <aop:config>
+
+        <!--切点-->
+        <aop:pointcut id="pt" expression="execution(* com.bjsxt.pojo.User.b(..))"></aop:pointcut>
+
+
+        <!--USer 类下的所有的方法-->
+        <aop:pointcut id="pt1" expression="execution(* com.bjsxt.pojo.User.*(..))"></aop:pointcut>
+
+        <!--pojo包下的所有类的所有方法-->
+        <aop:pointcut id="pt2" expression="execution(* com.bjsxt.pojo.*.*(..))"></aop:pointcut>
+
+
+
+
+        <!--通知-->
+        <aop:advisor advice-ref="befor" pointcut-ref="pt"></aop:advisor>
+
+        <aop:advisor advice-ref="after" pointcut-ref="pt"></aop:advisor>
+
+        <aop:advisor advice-ref="run"  pointcut-ref="pt"></aop:advisor>
+
+        <aop:advisor advice-ref="thr" pointcut-ref="pt"></aop:advisor>
+    </aop:config>
+
+
+</beans>

@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ssm-car:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ssm_car_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ssm-car/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ssm-car" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

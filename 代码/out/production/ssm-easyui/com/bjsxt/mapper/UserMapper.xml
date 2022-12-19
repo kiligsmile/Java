@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.UserMapper">
+
+    <select id="selectOne" resultType="user">
+
+        SELECT  *  from   user  where  uname=#{0} and pwd =#{1}
+
+    </select>
+
+    <select id="selectAll" resultType="user">
+
+        SELECT   *  from  USER
+
+    </select>
+
+
+    <insert id="insert">
+
+        INSERT   into  USER   VALUES (#{uid},#{uname},#{pwd})
+
+    </insert>
+
+
+    <update id="update">
+
+         UPDATE    USER    set uname=#{uname} ,pwd=#{pwd} where uid=#{uid}
+
+
+    </update>
+
+    <delete id="delete">
+
+       DELETE   from  user   where  uid =#{0}
+
+    </delete>
+
+</mapper>

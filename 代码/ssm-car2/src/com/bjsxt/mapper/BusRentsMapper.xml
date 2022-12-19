@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjsxt.mapper.BusRentsMapper">
+
+    <insert id="insert">
+
+         insert into bus_rents  values (#{rentid},#{price},#{begindate},#{returndate},0,#{identity},#{carnumber},#{opername})
+
+    </insert>
+
+    <select id="selectMore" resultType="busrents">
+
+        SELECT   *  from  bus_rents
+
+        <where>
+
+            <if test="rentid!=null and  rentid!=''">
+                rentid=#{rentid}
+            </if>
+
+            <if test="carnumber!=null and  carnumber!=''">
+                and carnumber=#{carnumber}
+            </if>
+
+            <if test="identity!=null and  identity!=''">
+                and identity=#{identity}
+            </if>
+
+            <if test="begindate!=null and  begindate!=''">
+               and   begindate=#{begindate}
+            </if>
+
+            <if test="returndate!=null and  returndate!=''">
+                and returndate=#{returndate}
+            </if>
+
+        </where>
+
+
+    </select>
+
+
+    <select id="selectOne" resultType="busrents">
+
+        SELECT  *  FROM   bus_rents  WHERE  rentid =#{param1} AND  rentflag=0
+
+    </select>
+
+
+    <update id="update">
+
+        UPDATE   bus_rents  set  rentflag=1  where  rentid=#{param1}
+
+    </update>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.StudentMapper">
+
+    <select id="selectMore" resultType="student">
+
+          SELECT   *  from  student
+
+          <where>
+
+               <!--OGNL表达式-->
+               <if test="param1!=null and  param1!=''">
+
+                    <bind name="pa" value="'%'+param1+'%'"></bind>
+
+                    name  like   #{pa}
+
+               </if>
+
+              <if test="param2!=null and  param2!=''">
+
+                  <bind name="pa2" value="'%'+param2+'%'"></bind>
+
+                   and  phone  like   #{pa2}
+
+              </if>
+
+
+           </where>
+
+
+    </select>
+
+
+</mapper>

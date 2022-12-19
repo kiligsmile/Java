@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="user" class="com.bjsxt.pojo.User"></bean>
+
+    <!--配置通知类-->
+    <bean id="aspect1" class="com.bjsxt.advice.AspectJ"></bean>
+
+    <!--Aspect J增加通知-->
+
+    <aop:config>
+
+         <aop:aspect ref="aspect1">
+
+              <aop:pointcut id="pt1" expression="execution(* com.bjsxt.pojo.User.c())"></aop:pointcut>
+
+             <!--前置通知-->
+             <aop:before method="beforAdvice" pointcut-ref="pt1"></aop:before>
+
+             <!--后置通知-->
+             <!--只有切点中的方法不报错的时候才会执行-->
+             <aop:after-returning method="afterAdvice" pointcut-ref="pt1"></aop:after-returning>
+
+             <!--不管切点方法是否报错都会执行后置通知-->
+              <!--<aop:after method="afterAdvice" pointcut-ref="pt1"></aop:after>
+-->
+              <aop:around method="runAdvice" pointcut-ref="pt1"></aop:around>
+             <!--异常通知-->
+               <aop:after-throwing method="throwsAdvice" pointcut-ref="pt1"></aop:after-throwing>
+
+         </aop:aspect>
+
+    </aop:config>
+
+
+
+
+</beans>

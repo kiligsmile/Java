@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.BusCustomersMapper">
+
+    <select id="selectOne" resultType="BusCustomers">
+
+
+         SELECT   *  from  bus_customers  where  identity=#{0}
+
+    </select>
+</mapper>

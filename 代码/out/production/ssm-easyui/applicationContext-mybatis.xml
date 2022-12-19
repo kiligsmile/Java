@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+
+      <!--[1]获得数据库连接-->
+
+    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis4"></property>
+
+        <property name="username" value="root"></property>
+
+        <property name="password" value="root"></property>
+    </bean>
+
+       <!--[2]获得session工厂-->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+
+        <property name="dataSource" ref="ds"></property>
+
+        <property name="typeAliasesPackage" value="com.bjsxt.pojo"></property>
+
+        <!--配置分页插件-->
+        <property name="plugins">
+            <list>
+                <bean id="pg" class="com.github.pagehelper.PageHelper">
+
+                    <property name="properties">
+
+                        <props>
+                            <prop key="dialect">mysql</prop>
+
+                            <prop key="pageSizeZero">true</prop>
+
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </list>
+        </property>
+
+
+    </bean>
+
+
+      <!--[3]扫描mapper文件-->
+
+    <bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+        <property name="sqlSessionFactoryBeanName" value="factory"></property>
+
+        <property name="basePackage" value="com.bjsxt.mapper"></property>
+    </bean>
+
+
+
+
+</beans>

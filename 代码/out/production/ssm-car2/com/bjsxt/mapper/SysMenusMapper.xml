@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjsxt.mapper.SysMenusMapper">
+
+    <select id="selectMore" resultType="sysMenus">
+
+        SELECT  * FROM  sys_menus  WHERE  pid =#{param1}
+
+    </select>
+
+    <select id="selectMore3" resultType="sysMenus">
+
+SELECT  *  FROM  `sys_menus`   WHERE  id   IN (SELECT  MID   FROM  `sys_role_menu`  WHERE  rid=#{param2})  AND  pid =#{param1}
+
+    </select>
+
+    <select id="selectAll" resultType="sysMenus">
+
+        SELECT  * FROM  sys_menus
+
+    </select>
+
+    <insert id="insert">
+
+        insert into  sys_menus(id,pid,name,url,open) values (DEFAULT ,#{pid},#{name},#{url},#{open})
+
+    </insert>
+
+    <update id="update">
+
+         UPDATE  sys_menus  set  open=#{param2}  where  id =#{param1}
+    </update>
+
+    <update id="update2">
+
+        update sys_menus set  pid =#{pid},name=#{name},url=#{url},open=#{open}  where  id =#{id}
+
+    </update>
+
+    <delete id="delete">
+
+        DELETE   from  sys_menus  where  id =#{param1}
+
+    </delete>
+
+    <select id="selectMore2" resultType="tree">
+
+        SELECT  id , NAME  TEXT   FROM  sys_menus  WHERE  pid=#{param1}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+     <!--[1]使用无参构造创建对象-->
+
+    <bean id="stu" class="com.bjsxt.spring02.Student"></bean>
+
+
+    <!--[2]使用有参构造
+
+         A、name属性和对应类中的有参构造的形参名称一致
+
+         B、书写constructor-arg 标签的顺序和有参构造的形参的顺序无关
+
+         C、我们可以使用 name 、index  和 type   共同约束我们调用的方法
+
+    -->
+    <bean id="stu2" class="com.bjsxt.spring02.Student">
+
+        <!--<constructor-arg name="age" value="18"></constructor-arg>
+
+        <constructor-arg name="sex" value="男"></constructor-arg>
+
+        <constructor-arg name="name" value="zs"></constructor-arg>-->
+
+        <constructor-arg name="a" index="0" type="int" value="12"></constructor-arg>
+
+        <constructor-arg name="b" index="1" type="java.lang.String" value="sxt"></constructor-arg>
+
+    </bean>
+
+    <!--[3]工厂模式-->
+
+    <!-- Factory  factory=new  Factory()-->
+    <bean id="factory" class="com.bjsxt.spring03.Factory"></bean>
+
+    <!-- People  po= factory.getInstance('tea')-->
+    <bean id="po" factory-bean="factory" factory-method="getInstance">
+
+        <constructor-arg name="param" value="stu"></constructor-arg>
+
+    </bean>
+
+
+     <!--People tea = Factory.getInstance2("tea");-->
+    <bean id="po2" class="com.bjsxt.spring03.Factory" factory-method="getInstance2">
+
+        <constructor-arg name="param" value="stu"></constructor-arg>
+
+    </bean>
+
+
+</beans>
